@@ -1,0 +1,17 @@
+{
+  "name": "battleship",
+  "version": "1.0.0",
+  "description": "TOP Battleship assignment",
+  "main": "script.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "n335t3r",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
+}
