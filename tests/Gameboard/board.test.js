@@ -79,11 +79,21 @@ describe("getShipCoords", () => {
 
 describe('initShip', () => {
     it('patrolBoat', () => {
-        expect(initShip('patrolBoat', 'a1', 'down')).toEqual({
+        expect(initShip('Patrol Boat', 'a1', 'down')).toEqual({
             coordinates: [['A', 1],['B', 1]],
             hits: 0,
             length: 2,
             name: 'Patrol Boat',
+            sunk: false
+        });
+    });
+
+    it('Carrier', () => {
+        expect(initShip('Carrier', 'c3', 'right')).toEqual({
+            length: 5,
+            hits: 0,
+            coordinates: [['C', 3],['C', 4],['C', 5],['C', 6],['C', 7]],
+            name: 'Carrier',
             sunk: false
         });
     });
