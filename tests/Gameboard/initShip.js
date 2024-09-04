@@ -1,4 +1,5 @@
 const getShipCoords = require("./getShipCoords");
+
 class Ship {
     constructor ({length, coordinates, name}) {
         this.length = length

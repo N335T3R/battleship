@@ -9,13 +9,6 @@ class Ship {
         this.sunk = false;
     }
 
-    // Takes in array coordinate and converts to string
-    // for equality testing; converts coordinates to string
-    // & compares received coordinate to hits & 
-    // ship coordinates;
-    // if (!hits.include && coordinates.includes), 
-    // adds coordinate to hits and returns true,
-    // else returns false
     receiveHit(coordinate) {
         let coord = coordinate.toString();
         let hit = false;
@@ -32,9 +25,40 @@ class Ship {
         return hit;
     }
 
-    
     isSunk() {
         this.sunk = this.hits.length >= this.length;
         return this.hits.length >= this.length;
     }
 }
+
+
+let ships = [];
+
+
+const destroyer = new Ship({
+    length: 3,
+    name: 'Destroyer',
+    coordinates: [['A', 4],['B', 4],['C', 4]]
+});
+const patrolBoat = new Ship({
+    length: 2,
+    name: 'Patrol Boat',
+    coordinates: [['D', 7],['D', 6]]
+});
+patrolBoat.hits.push('D,6');
+const sub = new Ship({
+    length: 4,
+    name: 'Submarine',
+    coordinates: [['A', 4],['B', 4],['C', 4],['D', 4]]
+});
+sub.hits.push('B,4');
+sub.hits.push('D,4');
+
+ships.push(destroyer, patrolBoat, sub);
+
+
+module.exports = ships;
+
+
+
+

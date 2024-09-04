@@ -16,7 +16,7 @@ class Gameboard {
         this.ships = [];
     }
 
-
+    // converts string input coordinate to array
     initCoords(string) {
         let coord = [];
         let letter = /\p{L}/u;
@@ -33,6 +33,9 @@ class Gameboard {
         return coord;
     }
 
+    // Based on direction, transforms a coordinate
+    // into the coordinate directly next in specified
+    // direction
     transformCoord(start, dir) {
         let letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
         let m = letters.indexOf(start[0]);
@@ -62,6 +65,9 @@ class Gameboard {
         return coord;
     }
 
+    // Based on direction and length, takes starting
+    // coordinate and populates an array of
+    // coordinates to describe ship placement on board
     getShipCoords(start, long, dir) {
         let coords = [];
         
@@ -77,6 +83,9 @@ class Gameboard {
         return coords;
     }
 
+    // Takes ship name, starting coordinate, and direction;
+    // Creates new Ship() and auto-populates length
+    // &  coordinates
     initShip(name, start, dir) {
         let long = 0;
     
@@ -109,7 +118,8 @@ class Gameboard {
             coordinates: coordinates
         });
     
-        this.ships.push(ship);
+        // this.ships.push(ship);
+        return ship();
     }
 
 
