@@ -29,12 +29,14 @@ class Ship {
             }
         }
 
+        this.isSunk();
         return hit;
+        // returns both true and false. Why?
     }
 
     
     isSunk() {
         this.sunk = this.hits.length >= this.length;
-        return this.hits.length >= this.length;
+        return this.sunk;
     }
 }

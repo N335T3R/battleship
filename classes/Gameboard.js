@@ -13,7 +13,9 @@ class Gameboard {
             [['J', 1],['J', 2],['J', 3],['J', 4],['J', 5],['J', 6],['J', 7],['J', 8],['J', 9],['J', 10]]];
         this.hits = [];
         this.misses = [];
+        this.occupied = [];
         this.ships = [];
+        this.sunk = false;
     }
 
     // converts string input coordinate to array
@@ -70,14 +72,29 @@ class Gameboard {
     // coordinates to describe ship placement on board
     getShipCoords(start, long, dir) {
         let coords = [];
-        
+        // translate start to coordinate array
         let first = this.initCoords(start);
         coords.push(first);
+        // stringy coordinates for equality testing
+        let occ = first.toString();
+
+
+        
+        // Push start coordinate to occupied 
+        // coordinates list
+        this.occupied.push(occ);
     
+        // Generate remaining squares
+        // for ship to occupy base on length & direction
         for (let i = 0; i < long - 1; i++) {
             let last = coords[i];
             let next = this.transformCoord(last, dir);
             coords.push(next);
+
+            // push generated coordinates to occupied 
+            // coordinates list
+            let occ1 = next.toString();
+            this.occupied.push(occ1);
         }
     
         return coords;
@@ -110,7 +127,7 @@ class Gameboard {
                 break;
         }
     
-        let coordinates = getShipCoords(start, long, dir);
+        let coordinates = this.getShipCoords(start, long, dir);
     
         let ship = new Ship({
             length: long,
@@ -118,20 +135,38 @@ class Gameboard {
             coordinates: coordinates
         });
     
-        // this.ships.push(ship);
-        return ship();
+        this.ships.push(ship);
+        return ship;
     }
 
 
-    receiveAttack(coordinates) {
-        let row = coordinates[0];
-        let col = coordinates[1];
+    // cycles through ships, calling 
+    // ship.receiveHit(); if hit === true,
+    // pushes coordinate to hits, else to misses
+    receiveAttack(coordinate) {
+        let hit;
 
-        // alert if coordinate received already attacked
-        if (this.hits.includes(coordinates) ||
-            this.misses.includes(coordinates)) {
-            console.log(`Already hit here!`)
+        for (let i = 0; i < this.ships.length; i++) {
+            hit = this.ships[i].receiveHit(coordinate);
+            // logs as both true and false; why?
         }
+
+        // all received pushing to misses. why?
+        if (hit) this.hits.push(coordinate);
+        else this.misses.push(coordinate);
+
+        return hit;
     }
 
+    // checks if all ships.sunk === true
+    checkSunk() {
+        let check = 0;
+
+        for(let i = 0; i < this.ships.length; i++) {
+            if(this.ships[i].sunk) check++;
+        }
+
+        if (check >= this.ships.length) this.sunk = true;
+        else return false;
+    }
 }
