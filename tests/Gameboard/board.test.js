@@ -1,7 +1,9 @@
 const initCoords = require("./initCoords");
 const getShipCoords = require("./getShipCoords");
-const transformCoord = require("./transformCoord");
+const transformCoord = require("./transformCoords");
 const initShip = require("./initShip");
+const stringCoords = require("./stringCoords");
+
 
 
 describe('initCoords', () => {
@@ -99,3 +101,24 @@ describe('initShip', () => {
     });
 });
 
+
+
+// describe('receiveAttack', () => {
+
+// });
+
+
+
+describe('stringCoords', () => {
+    it('[a, 4]', () => {
+        expect(stringCoords(['A', 4])).toMatch('A4');
+    });
+
+    it('[J, 10]', () => {
+        expect(stringCoords(['J', 10])).toMatch('J10');
+    });
+
+    it('[D, 5]', () => {
+        expect(stringCoords(['D', 5])).toMatch('D5');
+    });
+});

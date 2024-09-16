@@ -139,34 +139,46 @@ class Gameboard {
         return ship;
     }
 
-
-    // cycles through ships, calling 
-    // ship.receiveHit(); if hit === true,
-    // pushes coordinate to hits, else to misses
+    // if received coordinates match a ship's coordinates,
+    // push coordinate to ship hits and board hits, else
+    // push coordinate to board misses
     receiveAttack(coordinate) {
-        let hit;
-
+        let coord = coordinate.toString();
+        let test;
+        
         for (let i = 0; i < this.ships.length; i++) {
-            hit = this.ships[i].receiveHit(coordinate);
-            // logs as both true and false; why?
+            // cycle through ships
+            for(let j = 0; j < this.ships[i].coordinates.length; j++) {
+                // cycle through a ship's coordinates
+                let ref = this.ships[i].coordinates[j].toString();
+                
+                if (coord === ref) {
+                    test = true;
+                    this.hits.push(coord);
+                    this.ships[i].hits.push(coord);
+                }
+            }
         }
 
-        // all received pushing to misses. why?
-        if (hit) this.hits.push(coordinate);
-        else this.misses.push(coordinate);
-
-        return hit;
+        if(!test) this.misses.push(coord);
+        return true;
     }
 
     // checks if all ships.sunk === true
+    // runs isSunk() on all ships
     checkSunk() {
         let check = 0;
 
-        for(let i = 0; i < this.ships.length; i++) {
-            if(this.ships[i].sunk) check++;
+        for (let i = 0; i < this.ships.length; i++) {
+            let sink = this.ships[i].isSunk();
+            if (sink) check++;
         }
 
-        if (check >= this.ships.length) this.sunk = true;
-        else return false;
+        if (check === this.ships.length) {
+            this.sunk = true;
+            console.log('You lose');
+        } else this.sunk = false;
     }
 }
+
+

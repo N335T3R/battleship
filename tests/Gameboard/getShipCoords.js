@@ -1,5 +1,5 @@
 const initCoords = require("./initCoords");
-const transformCoord = require("./transformCoord");
+const transformCoord = require("./transformCoords");
 
 
 function getShipCoords(start, long, dir) {

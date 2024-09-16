@@ -1,0 +1,96 @@
+*, *::after, *::before {
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #333;
+}
+
+h1 {
+    font-size: 5rem;
+}
+
+.header {
+    padding: 1rem;
+
+    display: flex;
+    justify-content: space-between;
+}
+
+.header > h1 {
+    color: rgb(200, 0, 60);
+}
+
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+    .menu {
+        background-color: transparent;
+        border: none;
+        border-radius: .5rem;
+    
+        font-size: 5rem;
+    }
+    .menu:hover {
+        box-shadow: 0px 0px 10px 2px lightblue;
+    }
+
+
+
+    
+    .control {
+        display: flex;
+        height: 10rem;
+        background-color: blue;
+    }
+
+    .pScore {
+        background-color: yellow;
+        height: 100%;
+        width: 30%;
+    }
+    .interface {
+        background-color: whitesmoke;
+        height: 100%;
+        width: 40%;
+    }
+    .cScore {
+        background-color: purple;
+        height: 100%;
+        width: 30%;
+    }
+
+
+    
+    .arena {
+        display: flex;
+        /* background-color: #777; */
+        height: 30rem;
+    }
+
+    .player {
+        background-color: rgba(0, 200, 0, 0.25);
+        height: 100%;
+        width: 50%;
+        border-right: .25rem solid white;
+    }
+    .comp {
+        background-color: rgba(200, 0, 0, 0.5);
+        height: 100%;
+        width: 50%;
+        border-left: .25rem solid white;
+    }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {}
