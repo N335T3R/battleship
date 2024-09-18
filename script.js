@@ -25,7 +25,7 @@ function initArena() {// PLAYER BOARD
         let alph = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
         const row = document.createElement('div');
         row.className = alph[i];
-        cBoard.appendChild(row);
+        pBoard.appendChild(row);
     
         row.style.width = '100%';
         row.style.height = '10%';
@@ -34,7 +34,7 @@ function initArena() {// PLAYER BOARD
         // create 10 squares in row
         for (let j = 0; j < 10; j++) {
             const square = document.createElement('div');
-            square.className = stringCoords(player.board.board[i][j]);
+            square.className = 'p' + stringCoords(player.board.board[i][j]);
             row.appendChild(square);
     
             square.style.width = '10%';
@@ -50,7 +50,7 @@ function initArena() {// PLAYER BOARD
         let alph = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
         const row = document.createElement('div');
         row.className = alph[i];
-        pBoard.appendChild(row);
+        cBoard.appendChild(row);
     
         row.style.width = '100%';
         row.style.height = '10%';
@@ -59,7 +59,7 @@ function initArena() {// PLAYER BOARD
         // create 10 squares in row
         for (let j = 0; j < 10; j++) {
             const square = document.createElement('div');
-            square.className = stringCoords(player.board.board[i][j]);
+            square.className = 'e' + stringCoords(player.board.board[i][j]);
             row.appendChild(square);
     
             square.style.width = '10%';
@@ -68,6 +68,40 @@ function initArena() {// PLAYER BOARD
         }
     }
 }
+enemy.board.initShip('Carrier', 'A4', 'down');
+console.log(enemy.board);
+
+// Takes coordinate(string); enemy Gameboard logs hit
+// or miss; corresponding DOM element changes color
+// based on hit or miss
+function playerTurn() {
+    let input = prompt('Enter a coordinate');
+    let name = 'e' + input;
+    let square = document.getElementsByClassName(name)[0];
+
+    let hit = enemy.board.receiveAttack(input);
+    console.log(hit, enemy.board);
+
+    // without, things happen too fast
+    setTimeout(() => {
+        if (hit) square.style.backgroundColor = 'red';
+        else square.style.backgroundColor = 'cyan';
+    }, 1000);
+}
+
+function enemyTurn() {
+    // check if there is a hit on an UNSUNK
+    // player ship - if yes, aim for a square
+    // adjacent to that hit
+
+    // ELSE
+
+    // Generate coordinates based on Math.random
+    // run player.board.receiveAttack()
+    // update DOM
+}
+
 
 
 initArena();
+playerTurn();

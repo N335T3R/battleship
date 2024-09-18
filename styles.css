@@ -76,13 +76,13 @@ h1 {
     }
 
     .player {
-        background-color: rgba(0, 200, 0, 0.25);
+        /* background-color: rgba(0, 200, 0, 0.25); */
         height: 100%;
         width: 50%;
         border-right: .25rem solid white;
     }
     .comp {
-        background-color: rgba(200, 0, 0, 0.5);
+        /* background-color: rgba(200, 0, 0, 0.5); */
         height: 100%;
         width: 50%;
         border-left: .25rem solid white;

@@ -77,6 +77,7 @@ class Gameboard {
         coords.push(first);
         // stringy coordinates for equality testing
         let occ = first.toString();
+        occ = occ.replace(',', '');
 
 
         
@@ -94,6 +95,7 @@ class Gameboard {
             // push generated coordinates to occupied 
             // coordinates list
             let occ1 = next.toString();
+            occ1 = occ1.replace(',', '');
             this.occupied.push(occ1);
         }
     
@@ -151,17 +153,19 @@ class Gameboard {
             for(let j = 0; j < this.ships[i].coordinates.length; j++) {
                 // cycle through a ship's coordinates
                 let ref = this.ships[i].coordinates[j].toString();
+                ref = ref.replace(',', '');
                 
                 if (coord === ref) {
                     test = true;
                     this.hits.push(coord);
                     this.ships[i].hits.push(coord);
+                    return true;
                 }
             }
         }
 
         if(!test) this.misses.push(coord);
-        return true;
+        return false;
     }
 
     // checks if all ships.sunk === true
