@@ -69,7 +69,7 @@ function initArena() {// PLAYER BOARD
     }
 }
 enemy.board.initShip('Carrier', 'A4', 'down');
-console.log(enemy.board);
+// console.log(enemy.board);
 
 // Takes coordinate(string); enemy Gameboard logs hit
 // or miss; corresponding DOM element changes color
@@ -80,13 +80,28 @@ function playerTurn() {
     let square = document.getElementsByClassName(name)[0];
 
     let hit = enemy.board.receiveAttack(input);
-    console.log(hit, enemy.board);
+    // console.log(hit, enemy.board);
 
     // without, things happen too fast
     setTimeout(() => {
         if (hit) square.style.backgroundColor = 'red';
         else square.style.backgroundColor = 'cyan';
     }, 1000);
+}
+
+
+// Make this function a Gameboard method?
+function getRandomCoord() {
+        // Block of delcarations generates a random coordinate
+        let alph = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
+        let nums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+        let die = Math.floor(Math.random() * 10);
+        let die2 = Math.floor(Math.random() * 10);
+        let row = alph[die];
+        let col = nums[die2];
+        let coord = (row + col).toString();
+
+        return coord;
 }
 
 function enemyTurn() {
@@ -96,12 +111,29 @@ function enemyTurn() {
 
     // ELSE
 
-    // Generate coordinates based on Math.random
-    // run player.board.receiveAttack()
-    // update DOM
+    let coord = getRandomCoord();
+
+    // write code to see if 
+    // player.board.misses.includes(coord) ||
+    // player.board.hits.includes(coord);
+
+    let square = document.getElementsByClassName('p' + coord)[0];
+    console.log(square);
+
+    let hit = player.board.receiveAttack(coord);
+    // console.log(hit, enemy.board);
+
+    // without, things happen too fast
+    setTimeout(() => {
+        if (hit) square.style.backgroundColor = 'red';
+        else square.style.backgroundColor = 'cyan';
+    }, 1000);
+
+    console.log(player);
 }
 
 
 
 initArena();
 playerTurn();
+enemyTurn();
