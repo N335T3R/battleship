@@ -1,5 +1,6 @@
 const pScore = document.getElementById('pScore');
 const interface = document.getElementById('interface');
+const fireForm = document.getElementById('fireForm');
 const cScore = document.getElementById('cScore');
 
 const player = new Player();
@@ -8,132 +9,33 @@ const pBoard = document.getElementById('player');
 const cBoard = document.getElementById('comp');
 
 
-function stringCoords(arr) {
-    let string = arr.toString();
 
-    string = string.replaceAll(',', '');
-    string = string.replaceAll(' ', '');
-    string = string.replace('[', '');
-    string = string.replace(']', '');
-
-    return string;
-}
-
-function initArena() {// PLAYER BOARD
-    // creates 10 rows and appends to player board
-    for (let i = 0; i < player.board.board.length; i++) {
-        let alph = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
-        const row = document.createElement('div');
-        row.className = alph[i];
-        pBoard.appendChild(row);
-    
-        row.style.width = '100%';
-        row.style.height = '10%';
-        row.style.display = 'flex';
-    
-        // create 10 squares in row
-        for (let j = 0; j < 10; j++) {
-            const square = document.createElement('div');
-            square.className = 'p' + stringCoords(player.board.board[i][j]);
-            row.appendChild(square);
-    
-            square.style.width = '10%';
-            square.style.height = '100%';
-            square.style.border = '0.01rem solid white';
-        }
-    }
-    
-    
-    // ENEMY BOARD
-    // creates 10 rows and appends to player board
-    for (let i = 0; i < enemy.board.board.length; i++) {
-        let alph = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
-        const row = document.createElement('div');
-        row.className = alph[i];
-        cBoard.appendChild(row);
-    
-        row.style.width = '100%';
-        row.style.height = '10%';
-        row.style.display = 'flex';
-    
-        // create 10 squares in row
-        for (let j = 0; j < 10; j++) {
-            const square = document.createElement('div');
-            square.className = 'e' + stringCoords(player.board.board[i][j]);
-            row.appendChild(square);
-    
-            square.style.width = '10%';
-            square.style.height = '100%';
-            square.style.border = '0.01rem solid white';
-        }
-    }
-}
 enemy.board.initShip('Carrier', 'A4', 'down');
 // console.log(enemy.board);
+function initFire() {
+    var formData = new FormData(fireForm);
+    let obj = Object.fromEntries(formData);
+    let arr = [];
+    let d = /\p{N}/u;
 
+    // pushes value of key,value pair to arr
+    for (var pair of formData.entries()) arr.push(pair[1]);
+    
+
+    let string = stringCoords(arr);
+    return string;
+}
 // Takes coordinate(string); enemy Gameboard logs hit
 // or miss; corresponding DOM element changes color
 // based on hit or miss
-function playerTurn() {
-    let input = prompt('Enter a coordinate');
-    let name = 'e' + input;
-    let square = document.getElementsByClassName(name)[0];
+fireForm.addEventListener('submit', (e) => {
+    e.preventDefault();
 
-    let hit = enemy.board.receiveAttack(input);
-    // console.log(hit, enemy.board);
-
-    // without, things happen too fast
-    setTimeout(() => {
-        if (hit) square.style.backgroundColor = 'red';
-        else square.style.backgroundColor = 'cyan';
-    }, 1000);
-}
-
-
-// Make this function a Gameboard method?
-function getRandomCoord() {
-        // Block of delcarations generates a random coordinate
-        let alph = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
-        let nums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-        let die = Math.floor(Math.random() * 10);
-        let die2 = Math.floor(Math.random() * 10);
-        let row = alph[die];
-        let col = nums[die2];
-        let coord = (row + col).toString();
-
-        return coord;
-}
-
-function enemyTurn() {
-    // check if there is a hit on an UNSUNK
-    // player ship - if yes, aim for a square
-    // adjacent to that hit
-
-    // ELSE
-
-    let coord = getRandomCoord();
-
-    // write code to see if 
-    // player.board.misses.includes(coord) ||
-    // player.board.hits.includes(coord);
-
-    let square = document.getElementsByClassName('p' + coord)[0];
-    console.log(square);
-
-    let hit = player.board.receiveAttack(coord);
-    // console.log(hit, enemy.board);
-
-    // without, things happen too fast
-    setTimeout(() => {
-        if (hit) square.style.backgroundColor = 'red';
-        else square.style.backgroundColor = 'cyan';
-    }, 1000);
-
-    console.log(player);
-}
+    let input = initFire();
+    takeTurn(input);
+});
 
 
 
 initArena();
-playerTurn();
-enemyTurn();
+// takeTurn();

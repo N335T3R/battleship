@@ -159,9 +159,13 @@ class Gameboard {
                     test = true;
                     this.hits.push(coord);
                     this.ships[i].hits.push(coord);
+                    // check all ships for sunk after evaluating hit
+                    this.ships[i].isSunk();
                     return true;
                 }
             }
+            // check all ships for sunk after evaluating hit
+            this.ships[i].isSunk();
         }
 
         if(!test) this.misses.push(coord);

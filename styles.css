@@ -48,7 +48,7 @@ h1 {
     .control {
         display: flex;
         height: 10rem;
-        background-color: blue;
+        /* background-color: blue; */
     }
 
     .pScore {
@@ -56,11 +56,44 @@ h1 {
         height: 100%;
         width: 30%;
     }
+
+
     .interface {
-        background-color: whitesmoke;
+        /* background-color: whitesmoke; */
         height: 100%;
         width: 40%;
     }
+    .menus {
+        display: flex;
+        justify-content: space-around;
+        padding: 1rem;
+    }
+    .rowLabel, .colLabel {
+        color: whitesmoke;
+        font-size: 2rem;
+        font-family: 'Courier New', Courier, monospace;
+    }
+    .rowSelect, .colSelect {
+        border-radius: 0.25rem;
+
+        font-size: 1.5rem;
+        font-family: 'Courier New', Courier, monospace;
+        font-weight: 700;
+    }
+    .buttonDiv {
+        display: flex;
+        justify-content: center;
+        padding: 0.75rem;
+    }
+    .fireBtn {
+        align-self: center;
+        
+        font-size: 2rem;
+        background-color: red;
+        color: white;
+    }
+
+
     .cScore {
         background-color: purple;
         height: 100%;
