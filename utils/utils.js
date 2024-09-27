@@ -141,6 +141,27 @@ function takeTurn(input) {
 function resetGame() {
     modal.style.display = 'block';
     content.style.filter = 'blur(8px)';
+    
+
+    for(let i = 0; i < player.board.board.length; i++) {
+        for (let j = 0; j < player.board.board[i].length; j++) {
+            let name = 'p' + stringCoords(player.board.board[i][j]);
+            // console.log(name);
+            let square = document.getElementsByClassName(name)[0];
+            square.style.backgroundColor = 'transparent';
+            square.style.opacity = '0.75';
+        }
+    }
+
+    for(let i = 0; i < enemy.board.board.length; i++) {
+        for (let j = 0; j < enemy.board.board[i].length; j++) {
+            let name = 'e' + stringCoords(player.board.board[i][j]);
+            // console.log(name);
+            let square = document.getElementsByClassName(name)[0];
+            square.style.backgroundColor = 'transparent';
+            square.style.opacity = '0.75';
+        }
+    }
 }
 
 function placeShips() {
