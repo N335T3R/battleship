@@ -24,14 +24,17 @@ class Gameboard {
         let letter = /\p{L}/u;
         let num = /\d/;
         // Purge all punct & spaces
-        for (let i = 0; i < string.length; i++) {
-            if (letter.test(string[i])) {
-                let L = string[i].toUpperCase();
-                coord.push(L);
-            }
-            if (num.test(string[i])) coord.push(parseInt(string[i]));
-        }
+        // for (let i = 0; i < string.length; i++) {
+        //     if (letter.test(string[i])) {
+        //         let L = string[i].toUpperCase();
+        //         coord.push(L);
+        //     }
+        // }
+        coord.push(string[0]);
+        coord.push(string.slice(1));
     
+        // to control for 10 from being separated
+        console.log('initCoord: ', coord);
         return coord;
     }
 
@@ -42,6 +45,8 @@ class Gameboard {
         let letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
         let m = letters.indexOf(start[0]);
         let n = start[1];
+
+        console.log(start);
        
         switch (dir) {
             case 'left':
@@ -59,7 +64,7 @@ class Gameboard {
                 else m = 0;
                 break;
             default: 
-                console.log('err');
+                console.log('err: Direction invalid', dir);
                 break;
         }
     
@@ -125,10 +130,11 @@ class Gameboard {
                 long = 2;
                 break;
             default:
-                console.log('err');
+                console.log('err: Ship Name invalid');
                 break;
         }
-    
+
+
         let coordinates = this.getShipCoords(start, long, dir);
     
         let ship = new Ship({

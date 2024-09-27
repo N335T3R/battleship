@@ -178,9 +178,19 @@ function initCarrier() {
         e.preventDefault();
     
         let input = initFire(placeForm);
-        let coord = input.slice(0, 2);
-        let dir = input.slice(2);
+        let coord;
+        let dir;
+        let test = /10/gm;
+
+        if (test.test(input)) {
+            coord = input.slice(0, 3);
+            dir = input.slice(3);
+        } else {
+            coord = input.slice(0, 2);
+            dir = input.slice(2);
+        }
     
+
         player.board.initShip('Carrier', coord, dir);
         
         for(let i = 0; i < player.board.occupied.length; i++) {
@@ -202,8 +212,17 @@ function placeBat(e) {
     e.preventDefault();
 
     let input = initFire(placeForm);
-    let coord = input.slice(0, 2);
-    let dir = input.slice(2);
+    let coord;
+    let dir;
+    let test = /10/gm;
+
+    if (test.test(input)) {
+        coord = input.slice(0, 3);
+        dir = input.slice(3);
+    } else {
+        coord = input.slice(0, 2);
+        dir = input.slice(2);
+    }
 
     player.board.initShip('Battleship', coord, dir);
     
@@ -223,8 +242,17 @@ function placeDes(e) {
     e.preventDefault();
 
     let input = initFire(placeForm);
-    let coord = input.slice(0, 2);
-    let dir = input.slice(2);
+    let coord;
+    let dir;
+    let test = /10/gm;
+
+    if (test.test(input)) {
+        coord = input.slice(0, 3);
+        dir = input.slice(3);
+    } else {
+        coord = input.slice(0, 2);
+        dir = input.slice(2);
+    }
 
     player.board.initShip('Destroyer', coord, dir);
     
@@ -244,8 +272,18 @@ function placeSub(e) {
     e.preventDefault();
 
     let input = initFire(placeForm);
-    let coord = input.slice(0, 2);
-    let dir = input.slice(2);
+    let coord;
+    let dir;
+
+    let test = /10/gm;
+
+    if (test.test(input)) {
+        coord = input.slice(0, 3);
+        dir = input.slice(3);
+    } else {
+        coord = input.slice(0, 2);
+        dir = input.slice(2);
+    }
 
     player.board.initShip('Submarine', coord, dir);
     
@@ -265,8 +303,17 @@ function placePatrol(e) {
     e.preventDefault();
 
     let input = initFire(placeForm);
-    let coord = input.slice(0, 2);
-    let dir = input.slice(2);
+    let coord;
+    let dir;
+    let test = /10/gm;
+
+    if (test.test(input)) {
+        coord = input.slice(0, 3);
+        dir = input.slice(3);
+    } else {
+        coord = input.slice(0, 2);
+        dir = input.slice(2);
+    }
 
     player.board.initShip('Patrol Boat', coord, dir);
     
