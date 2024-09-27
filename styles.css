@@ -10,6 +10,9 @@ body {
 h1 {
     font-size: 5rem;
 }
+h2 {
+    font-size: 2rem;
+}
 
 .header {
     padding: 1rem;
@@ -31,15 +34,17 @@ h1 {
 
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
-    .menu {
-        background-color: transparent;
+    .newGame {
+        background-color: green;
         border: none;
         border-radius: .5rem;
     
-        font-size: 5rem;
+        font-size: 2rem;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     }
-    .menu:hover {
+    .newGame:hover {
         box-shadow: 0px 0px 10px 2px lightblue;
+        color: whitesmoke;
     }
 
 
@@ -62,6 +67,9 @@ h1 {
         /* background-color: whitesmoke; */
         height: 100%;
         width: 40%;
+    }
+    .fireform {
+        display: block;
     }
     .menus {
         display: flex;
@@ -101,6 +109,7 @@ h1 {
     }
 
 
+
     
     .arena {
         display: flex;
@@ -120,6 +129,37 @@ h1 {
         width: 50%;
         border-left: .25rem solid white;
     }
+
+
+
+
+    /* PLACE SHIPS BOX fires on NEW GAME */
+    .modal {
+        display: none;
+        z-index: 1;
+        position: fixed;
+        top: 17%;
+        left: 30%;
+
+        height: 21rem;
+        width: 40%;
+        border-radius: .4rem;
+
+        background-color: red;
+        opacity: 0.75;
+   }
+   .title {
+    display: flex;
+    justify-content: space-around;
+    padding: 1rem;
+    margin: 1rem 0rem 1rem 0;
+   }
+   .place {
+    background-color: green;
+    color: white;
+
+    font-size: 2rem;
+   }
 }
 
 /* Large devices (laptops/desktops, 992px and up) */

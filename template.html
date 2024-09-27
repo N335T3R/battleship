@@ -18,57 +18,111 @@
 
 
 <body>
-    <div id="header" class="header">
-        <h1>Battleship</h1>
-        <button id="menu" class="menu">&#9776;</button>
-    </div>
-
-    <div id="control" class="control">
-        <div id="pScore" class="pScore"></div>
-
-        <div id="interface" class="interface">
-            <form action="" method="get" class="fireform" id="fireForm">
-                <div id="menus" class="menus">
-                    <label for="rowSelect" class="rowLabel">Row</label>
-                    <select name="rowSelect" id="rowSelect" class="rowSelect" form="fireForm">
-                        <option value="A">A</option>
-                        <option value="B">B</option>
-                        <option value="C">C</option>
-                        <option value="D">D</option>
-                        <option value="E">E</option>
-                        <option value="F">F</option>
-                        <option value="G">G</option>
-                        <option value="H">H</option>
-                        <option value="I">I</option>
-                        <option value="J">J</option>
-                    </select>
-                    <label for="colSelect" class="colLabel">Column</label>
-                    <select name="colSelect" id="colSelect" class="colSelect" form="fireForm">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        <option value="9">9</option>
-                        <option value="10">10</option>
-                    </select>
-                </div>
-                <div id="buttonDiv" class="buttonDiv">
-                    <input type="submit" value="FIRE!" class="fireBtn" form="fireForm">
-                </div>
-            </form>
+    <div id="content">
+        <div id="header" class="header">
+            <h1>Battleship</h1>
+            <button id="newGame" class="newGame">NEW GAME</button>
         </div>
 
-        <div id="cScore" class="cScore"></div>
+        <div id="control" class="control">
+            <div id="pScore" class="pScore"></div>
+
+            <div id="interface" class="interface">
+                <!-- ATTACK FORM -->
+                <form action="" method="get" class="fireform" id="fireForm">
+                    <div id="menus" class="menus">
+                        <label for="rowSelect" class="rowLabel">Row</label>
+                        <select name="rowSelect" id="rowSelect" class="rowSelect" form="fireForm">
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                            <option value="C">C</option>
+                            <option value="D">D</option>
+                            <option value="E">E</option>
+                            <option value="F">F</option>
+                            <option value="G">G</option>
+                            <option value="H">H</option>
+                            <option value="I">I</option>
+                            <option value="J">J</option>
+                        </select>
+                        <label for="colSelect" class="colLabel">Column</label>
+                        <select name="colSelect" id="colSelect" class="colSelect" form="fireForm">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                        </select>
+                    </div>
+                    <div id="buttonDiv" class="buttonDiv">
+                        <input type="submit" value="FIRE!" class="fireBtn" form="fireForm">
+                    </div>
+                </form>
+            </div>
+
+            <div id="cScore" class="cScore"></div>
+        </div>
+
+
+        <div id="arena" class="arena">
+            <div id="player" class="player"></div>
+            <div id="comp" class="comp"></div>
+        </div>
     </div>
 
+    <div id="modal" class="modal">
+            <div class="modalCont">
+                <div class="title">
+                    <h2>Place your </h2><h2 id="shipTitle"></h2>
+                </div>
 
-    <div id="arena" class="arena">
-        <div id="player" class="player"></div>
-        <div id="comp" class="comp"></div>
+                <form action="" method="get" class="placeform" id="placeform">
+                    <div class="menus">
+                        <label for="row" class="rowLabel">Row</label>
+                        <select name="rowS" class="rowSelect" form="placeform">
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                            <option value="C">C</option>
+                            <option value="D">D</option>
+                            <option value="E">E</option>
+                            <option value="F">F</option>
+                            <option value="G">G</option>
+                            <option value="H">H</option>
+                            <option value="I">I</option>
+                            <option value="J">J</option>
+                        </select>
+                        <label for="col" class="colLabel">Column</label>
+                        <select name="col" class="colSelect" form="placeform">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                        </select>
+                    </div>
+
+                    <div class="menus">
+                        <label for="direction" class="rowLabel">Direction</label>
+                        <select name="direction" id="direction" class="rowSelect">
+                            <option value="down">down</option>
+                            <option value="right">right</option>
+                        </select>
+                    </div>
+
+                    <div id="buttonDiv" class="buttonDiv">
+                        <input type="submit" value="SET SHIP" class="place" form="placeform">
+                    </div>
+                </form>
+            </div>
     </div>
 </body>
 </html>

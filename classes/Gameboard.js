@@ -184,8 +184,12 @@ class Gameboard {
 
         if (check === this.ships.length) {
             this.sunk = true;
+            return true;
             console.log('You lose');
-        } else this.sunk = false;
+        } else {
+            this.sunk = false;
+            return false;
+        }
     }
 }
 
