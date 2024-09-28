@@ -1,3 +1,4 @@
+// PREPARATORY FUNCIONS
 function stringCoords(arr) {
     let string = arr.toString();
 
@@ -21,7 +22,13 @@ function getRandomCoord() {
 
     return coord;
 }
+function getDir() {
+    let die = Math.floor(Math.random() * 10);
+    // console.log(die);
 
+    if (die > 5) return 'down';
+    else return 'right';
+}
 function initFire(form) {
     var formData = new FormData(form);
     let obj = Object.fromEntries(formData);
@@ -52,11 +59,14 @@ function initArena() {// PLAYER BOARD
         for (let j = 0; j < 10; j++) {
             const square = document.createElement('div');
             square.className = 'p' + stringCoords(player.board.board[i][j]);
+            square.textContent = stringCoords(player.board.board[i][j]);
             row.appendChild(square);
     
             square.style.width = '10%';
             square.style.height = '100%';
             square.style.border = '0.01rem solid white';
+            square.style.color = 'white';
+            square.style.fontSize = '0.75rem';
         }
     }
     
@@ -77,11 +87,14 @@ function initArena() {// PLAYER BOARD
         for (let j = 0; j < 10; j++) {
             const square = document.createElement('div');
             square.className = 'e' + stringCoords(player.board.board[i][j]);
+            square.textContent = stringCoords(player.board.board[i][j]);
             row.appendChild(square);
     
             square.style.width = '10%';
             square.style.height = '100%';
             square.style.border = '0.01rem solid white';
+            square.style.color = 'white';
+            square.style.fontSize = '0.75rem';
         }
     }
 }
@@ -89,13 +102,14 @@ function initArena() {// PLAYER BOARD
 
 
 
-
+// TURN-TAKING CODE
 function playerTurn(input) {
     // let input = prompt('Enter a coordinate');
     let name = 'e' + input;
     let square = document.getElementsByClassName(name)[0];
 
     let hit = enemy.board.receiveAttack(input);
+    enemy.board.checkSunk();
     // console.log(hit, enemy.board);
 
     // without, things happen too fast
@@ -122,6 +136,7 @@ function enemyTurn() {
     // console.log(square);
 
     let hit = player.board.receiveAttack(coord);
+    enemy.board.checkSunk();
     // console.log(hit, enemy.board);
 
     // without, things happen too fast
@@ -132,12 +147,21 @@ function enemyTurn() {
 
     // console.log(player);
 }
-
+function winState() {
+    if (enemy.board.sunk) prompt('You win!');
+    if (player.board.sunk) prompt('Computer wins.');
+}
 function takeTurn(input) {
     playerTurn(input);
-    enemyTurn();
+    setTimeout(enemyTurn, 1000);
+    winState();
 }
 
+
+
+
+
+// NEW GAME CODE
 function resetGame() {
     modal.style.display = 'block';
     content.style.filter = 'blur(8px)';
@@ -163,16 +187,15 @@ function resetGame() {
         }
     }
 }
-
+// Begins a sequence of functions that place
+// a ship & append ship to Gameboard, then
+// call another ship-placing function
 function placeShips() {
     shipTitle.textContent = 'Carrier';
     initCarrier();
 }
-
-
-
-
-// INIT INDIVIDUAL SHIPS
+// INIT INDIVIDUAL SHIPS;
+// these functions are called by placeShips()
 function initCarrier() {
     function place(e) {
         e.preventDefault();
@@ -330,4 +353,13 @@ function placePatrol(e) {
     content.style.filter = 'none';
 }
 
+function placeEnemyShips() {
+    let ships = ['Carrier', 'Battleship', 'Destroyer', 'Submarine', 'Patrol Boat'];
 
+    for (let i = 0; i < ships.length; i++) {
+        let start = getRandomCoord();
+        let dir = getDir();
+
+        enemy.board.initShip(ships[i], start, dir);
+    }
+}

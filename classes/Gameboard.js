@@ -34,26 +34,28 @@ class Gameboard {
         coord.push(string.slice(1));
     
         // to control for 10 from being separated
-        console.log('initCoord: ', coord);
+        // console.log('initCoord: ', coord);
         return coord;
     }
 
     // Based on direction, transforms a coordinate
     // into the coordinate directly next in specified
-    // direction
+    // direction; IF coords reach edge, next coord wraps
+    // around board
     transformCoord(start, dir) {
         let letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
         let m = letters.indexOf(start[0]);
         let n = start[1];
 
-        console.log(start);
+        // console.log('transform coord: ', start);
        
         switch (dir) {
             case 'left':
                 n--;
                 break;
             case 'right':
-                n++;
+                if (n < 10) n++;
+                else n = 1;
                 break;
             case 'up':
                 if (m > 0) m--;
@@ -64,7 +66,7 @@ class Gameboard {
                 else m = 0;
                 break;
             default: 
-                console.log('err: Direction invalid', dir);
+                console.log('err transformCoord: Direction invalid', dir);
                 break;
         }
     
@@ -130,7 +132,7 @@ class Gameboard {
                 long = 2;
                 break;
             default:
-                console.log('err: Ship Name invalid');
+                console.log('err board.initShip: Ship Name invalid');
                 break;
         }
 
@@ -167,7 +169,7 @@ class Gameboard {
                     this.ships[i].hits.push(coord);
                     // check all ships for sunk after evaluating hit
                     this.ships[i].isSunk();
-                    return true;
+                    // return true;
                 }
             }
             // check all ships for sunk after evaluating hit
@@ -175,7 +177,7 @@ class Gameboard {
         }
 
         if(!test) this.misses.push(coord);
-        return false;
+        return test;
     }
 
     // checks if all ships.sunk === true

@@ -21,14 +21,13 @@ const cBoard = document.getElementById('comp');
 
 
 initArena();
-enemy.board.initShip('Carrier', 'A4', 'down');
-
 
 
 
 newGame.addEventListener('click', () => {
     resetGame();
     placeShips();
+    placeEnemyShips();
 });
 
 fireForm.addEventListener('submit', (e) => {
@@ -37,5 +36,7 @@ fireForm.addEventListener('submit', (e) => {
     let input = initFire(fireForm);
     takeTurn(input);
 });
+
+
 
 

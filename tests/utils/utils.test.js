@@ -1,0 +1,1 @@
+const getDir = require('./getDir');

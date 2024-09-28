@@ -57,11 +57,10 @@ h2 {
     }
 
     .pScore {
-        background-color: yellow;
+        /* background-color: yellow; */
         height: 100%;
         width: 30%;
     }
-
 
     .interface {
         /* background-color: whitesmoke; */
@@ -101,9 +100,8 @@ h2 {
         color: white;
     }
 
-
     .cScore {
-        background-color: purple;
+        /* background-color: purple; */
         height: 100%;
         width: 30%;
     }
