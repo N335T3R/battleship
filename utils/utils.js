@@ -214,7 +214,13 @@ function initCarrier() {
         }
     
 
-        player.board.initShip('Carrier', coord, dir);
+        let carrier = player.board.initShip('Carrier', coord, dir);
+        player.board.ships.push(carrier);
+
+        for (let i = 0; i < carrier.coordinates.length; i++) {
+            let coord = stringCoords(carrier.coordinates[i]);
+            player.board.occupied.push(coord);
+        }
         
         for(let i = 0; i < player.board.occupied.length; i++) {
             let name = 'p' + player.board.occupied[i];
@@ -247,7 +253,13 @@ function placeBat(e) {
         dir = input.slice(2);
     }
 
-    player.board.initShip('Battleship', coord, dir);
+    let battleship = player.board.initShip('Battleship', coord, dir);
+    player.board.ships.push(battleship);
+
+    for (let i = 0; i < battleship.coordinates.length; i++) {
+        let coord = stringCoords(battleship.coordinates[i]);
+        player.board.occupied.push(coord);
+    }
     
     for(let i = 0; i < player.board.occupied.length; i++) {
         let name = 'p' + player.board.occupied[i];
@@ -277,8 +289,14 @@ function placeDes(e) {
         dir = input.slice(2);
     }
 
-    player.board.initShip('Destroyer', coord, dir);
+    let destroyer = player.board.initShip('Destroyer', coord, dir);
+    player.board.ships.push(destroyer);
     
+    for (let i = 0; i < destroyer.coordinates.length; i++) {
+        let coord = stringCoords(destroyer.coordinates[i]);
+        player.board.occupied.push(coord);
+    }
+
     for(let i = 0; i < player.board.occupied.length; i++) {
         let name = 'p' + player.board.occupied[i];
         let square = document.getElementsByClassName(name)[0];
@@ -308,8 +326,14 @@ function placeSub(e) {
         dir = input.slice(2);
     }
 
-    player.board.initShip('Submarine', coord, dir);
+    let submarine = player.board.initShip('Submarine', coord, dir);
+    player.board.ships.push(submarine);
     
+    for (let i = 0; i < submarine.coordinates.length; i++) {
+        let coord = stringCoords(submarine.coordinates[i]);
+        player.board.occupied.push(coord);
+    }
+
     for(let i = 0; i < player.board.occupied.length; i++) {
         let name = 'p' + player.board.occupied[i];
         let square = document.getElementsByClassName(name)[0];
@@ -338,8 +362,14 @@ function placePatrol(e) {
         dir = input.slice(2);
     }
 
-    player.board.initShip('Patrol Boat', coord, dir);
+    let patrol = player.board.initShip('Patrol Boat', coord, dir);
+    player.board.ships.push(patrol);
     
+    for (let i = 0; i < patrol.coordinates.length; i++) {
+        let coord = stringCoords(patrol.coordinates[i]);
+        player.board.occupied.push(coord);
+    }
+
     for(let i = 0; i < player.board.occupied.length; i++) {
         let name = 'p' + player.board.occupied[i];
         let square = document.getElementsByClassName(name)[0];
@@ -357,9 +387,67 @@ function placeEnemyShips() {
     let ships = ['Carrier', 'Battleship', 'Destroyer', 'Submarine', 'Patrol Boat'];
 
     for (let i = 0; i < ships.length; i++) {
-        let start = getRandomCoord();
-        let dir = getDir();
-
-        enemy.board.initShip(ships[i], start, dir);
+        let coords = testCoords(ships[i]);
+        // console.log(coords);
+        let start = coords[0];
+        let dir = coords[1];
+    
+        let ship = enemy.board.initShip(ships[i], start, dir);
     }
 }
+
+function testCoords(ship) {
+    let start = getRandomCoord();
+    let dir = getDir();
+    let long = 0;
+
+    switch (ship) {
+        case 'Carrier':
+            long = 5;
+            break;
+        case 'Battleship':
+            long = 4;
+            break;
+        case 'Destroyer':
+            long = 3;
+            break;
+        case 'Submarine':
+            long = 3;
+            break;
+        case 'Patrol Boat':
+            long = 2;
+            break;
+        default:
+            console.log('err board.initShip: Ship Name invalid');
+            break;
+    }
+    // console.log(long);
+
+    let coords = enemy.board.getShipCoords(start, long, dir);
+    // console.log(coords);
+    let test = false;
+
+    for (let i = 0; i < enemy.board.occupied.length; i++) {
+        if (coords.includes(enemy.board.occupied[i])) test = true;
+    }
+
+    if (test) {
+        testCoords(ship);
+    } else {
+        let output = [start, dir];
+        // console.log(output);
+        return output;
+    }
+    
+}
+
+    // initShip
+    // check if coordinates are already occupied
+        // if true: initShip
+        // if false: continue
+    // push to occupied and ships
+
+
+
+// function that transforms coords and checks 
+// occupied before initShip()

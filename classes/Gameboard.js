@@ -38,6 +38,17 @@ class Gameboard {
         return coord;
     }
 
+    stringCoords(arr) {
+        let string = arr.toString();
+    
+        string = string.replaceAll(',', '');
+        string = string.replaceAll(' ', '');
+        string = string.replace('[', '');
+        string = string.replace(']', '');
+    
+        return string;
+    }
+
     // Based on direction, transforms a coordinate
     // into the coordinate directly next in specified
     // direction; IF coords reach edge, next coord wraps
@@ -82,15 +93,19 @@ class Gameboard {
         // translate start to coordinate array
         let first = this.initCoords(start);
         coords.push(first);
-        // stringy coordinates for equality testing
-        let occ = first.toString();
-        occ = occ.replace(',', '');
+        // stringy coordinates for accessing 
+        // corresponding squares by className
+        // let occ = first.toString();
+        // occ = occ.replace(',', '');
+        // ^^^!!!   !!!^^^
 
+        // FUNCTIONALITY ABOVE AND BELOW RELOCATED
+        // TO initShip()
 
-        
+        // \/\/!!!   !!!\/\/
         // Push start coordinate to occupied 
         // coordinates list
-        this.occupied.push(occ);
+        // this.occupied.push(occ);
     
         // Generate remaining squares
         // for ship to occupy base on length & direction
@@ -101,9 +116,9 @@ class Gameboard {
 
             // push generated coordinates to occupied 
             // coordinates list
-            let occ1 = next.toString();
-            occ1 = occ1.replace(',', '');
-            this.occupied.push(occ1);
+            // let occ1 = next.toString();
+            // occ1 = occ1.replace(',', '');
+            // this.occupied.push(occ1);
         }
     
         return coords;
@@ -138,14 +153,31 @@ class Gameboard {
 
 
         let coordinates = this.getShipCoords(start, long, dir);
+
+        // push coordinates to this.occupied[]
+        // for (let i = 0; i < coordinates.length; i++) {
+        //     let coord = this.stringCoords(coordinates[i]);
+        //     this.occupied.push(coord);
+        // }
+        // ^^!! This moved to utils init functions for each ship !!^^
     
+        // create ship
         let ship = new Ship({
             length: long,
             name: name,
             coordinates: coordinates
         });
     
+        // push and return ship
         this.ships.push(ship);
+
+        for (let i = 0; i < ship.coordinates.length; i++) {
+            let occ = ship.coordinates[i].toString();
+            occ = occ.replace(',', '');
+
+            this.occupied.push(occ);
+        }
+        // ^^!! This moved to utils init ship functions
         return ship;
     }
 
